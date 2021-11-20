@@ -47,6 +47,6 @@ CustomDialog.defaultProps = {
   openDialog: false,
   handleCloseDialog: () => {},
   title: "Confirm",
-  textContent: "Are you sure you want to delete.",
+  textContent: "",
   onSubmit: () => {},
 };

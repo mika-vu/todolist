@@ -5,10 +5,11 @@ export default function CustomSnackbar({
   openSnackbar,
   handleCloseSnackbar,
   message,
+  ...rest
 }) {
   return (
     <Snackbar
-      autoHideDuration={1000}
+      {...rest}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       open={openSnackbar}
       onClose={handleCloseSnackbar}

@@ -50,6 +50,7 @@ export default function TodoItem({
         openDialog={openDialog}
         handleCloseDialog={handleCloseDialog}
         onSubmit={handleRemove}
+        textContent="Are you sure you want to delete."
       />
       <div className={classes.container}>
         <div className={classes.root}>

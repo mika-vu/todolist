@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Paper from "@mui/material/Paper";
@@ -29,6 +29,18 @@ function App() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
+
+  useEffect(() => {
+    const parsedTodoList = JSON.parse(localStorage.getItem("todoList"));
+    const convertedTodoList = _.map(parsedTodoList, (item) => ({
+      ...item,
+      date: new Date(item.date),
+    }));
+    setTodoList(convertedTodoList);
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
 
   const handleSearch = (e) => {
     setKeyword(e.target.value);
@@ -103,11 +115,13 @@ function App() {
           openSnackbar={openSnackbar}
           handleCloseSnackbar={handleCloseSnackbar}
           message={message}
+          autoHideDuration={1000}
         />
         <CustomDialog
           openDialog={openDialog}
           handleCloseDialog={handleCloseDialog}
           onSubmit={handleRemoveAll}
+          textContent="Are you sure you want to delete."
         />
         <Container maxWidth="xl">
           <Box p={0.5} />
